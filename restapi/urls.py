@@ -7,6 +7,7 @@ urlpatterns = [
     path('lista_facultades/', views.FacultadListAPIView.as_view(), name="lista_facultades"),
     path('lista_facultades/<int:cod_facultad>', views.FacultadRetrieveAPIView.as_view(), name="facultad_detalle"),
     path('crear_cabecera', views.Cabecera_PlanillaCreateAPIView.as_view(), name="crear_cabecera"),
+    path('actualizar_cabecera/<int:cod_cabecera_planilla>', views.Cabecera_PlanillaUpdateAPIView.as_view(), name="actualizar_cabecera"),
     path('crear_evaluaciones', views.EvaluacionesCreateAPIView.as_view(), name="crear_evaluaciones"),
     path('cargar_contenidos', views.Contenidos_DadosCreateAPIView.as_view(), name="cargar_contenidos"),
     path('cargar_recursos', views.Recursos_UtilizadosCreateAPIView.as_view(), name="cargar_recursos"),
