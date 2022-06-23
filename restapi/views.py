@@ -211,4 +211,7 @@ def borrarReporte(request, cabecera, user):
 def purga(request, cabecera):
     if request.method == 'GET':
         Contenidos_Dados.objects.filter(cod_cabecera_planilla_id = cabecera).delete()
+        Metodologia_Utilizada.objects.filter(cod_cabecera_planilla = cabecera).delete()
+        Recursos_Utilizados.objects.filter(cod_cabecera_planilla = cabecera).delete()
+        Trabajos_Utilizados.objects.filter(cod_cabecera_planilla = cabecera).delete()
         return JsonResponse({"bandera": 1})
