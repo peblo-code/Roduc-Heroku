@@ -46,7 +46,7 @@ class Cabecera_PlanillaCreateAPIView(generics.CreateAPIView):
 class Cabecera_PlanillaUpdateAPIView(generics.UpdateAPIView):
     lookup_field = "cod_cabecera_planilla"
     queryset = Cabecera_Planilla.objects.all()
-    serializer_class = Cabecera_PlanillaSerializer
+    serializer_class = Cabecera_PlanillaSerializer2
 
 class EvaluacionesCreateAPIView(generics.CreateAPIView):
     queryset = Evaluaciones.objects.all()

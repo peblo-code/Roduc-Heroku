@@ -91,8 +91,26 @@ class Cabecera_PlanillaSerializer(serializers.ModelSerializer):
             'evaluacion',
             'estado',
             'alta_usuario',
+        ]
+
+class Cabecera_PlanillaSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Cabecera_Planilla
+        fields = [
+            'cod_cabecera_planilla',
+            'cod_tipo_clase',
+            'cod_asignatura',
+            'cod_usuario',
+            'fecha_clase',
+            'hora_entrada',
+            'hora_salida',
+            'fecha_vencimiento',
+            'evaluacion',
+            'estado',
+            'alta_usuario',
             'modif_usuario'
         ]
+
 
 class Evaluaciones_Serializer(serializers.ModelSerializer):
     class Meta:
