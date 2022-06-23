@@ -138,6 +138,62 @@ def listaFacultades_Carreras(request, user):
             "lista_metodologia": lista_metodologia,
         })
 
+def listaUnidades_Contenidos(request, cabecera):
+    fecha_actual = str(datetime.today())
+    año_actual = fecha_actual[:(fecha_actual.find('-'))]
+
+    lista_contenido = Contenido.objects.raw('select\
+                                                *\
+                                        from\
+                                            "RoducWeb_contenido" as cont\
+                                        where\
+                                            cont.cod_contenido not in (\
+                                            select\
+                                                co.cod_contenido\
+                                            from\
+                                                "RoducWeb_contenido" as co ,\
+                                                "RoducWeb_contenidos_dados" as cd ,\
+                                                "RoducWeb_cabecera_planilla" as c\
+                                            where\
+                                                c.cod_cabecera_planilla = cd.cod_cabecera_planilla_id\
+                                                and cd.cod_cabecera_planilla_id <> ' + str(cabecera) + '\
+                                                and cd.cod_contenido_id = co.cod_contenido\
+                                                and c.fecha_clase between \'' + str(año_actual) + '/01/01\' and \'' + str(año_actual) + '/12/01\'\
+                                                and c.estado = 1\
+                                                and co.estado = 1\
+                                                and cd.estado = 1)\
+                                            and cont.estado = 1')
+    lista_unidad = Unidad_Aprendizaje.objects.raw('select\
+                                                    distinct u.cod_unidad_aprendizaje,\
+                                                    u.descripcion\
+                                                from\
+                                                    RoducWeb_unidad_aprendizaje as u,\
+                                                    (\
+                                                    select\
+                                                        *\
+                                                    from\
+                                                        RoducWeb_contenido as cont\
+                                                    where\
+                                                        cont.cod_contenido not in (\
+                                                        select\
+                                                            co.cod_contenido\
+                                                        from\
+                                                            RoducWeb_contenido as co,\
+                                                            RoducWeb_contenidos_dados as cd,\
+                                                            RoducWeb_cabecera_planilla as c\
+                                                        where\
+                                                            c.cod_cabecera_planilla = cd.cod_cabecera_planilla_id\
+                                                            and cd.cod_cabecera_planilla_id <> ' + str(cabecera) + '\
+                                                            and cd.cod_contenido_id = co.cod_contenido\
+                                                            and c.fecha_clase between \'' + str(año_actual) + '/01/01\' and \'' + str(año_actual) + '/12/01\'\
+                                                            and c.estado = 1\
+                                                            and co.estado = 1\
+                                                            and cd.estado = 1)\
+                                                        and cont.estado = 1) as con\
+                                                where\
+                                                    u.cod_unidad_aprendizaje = con.cod_unidad_aprendizaje_id')
+    
+
 def historialReportes(request, user):
     if request.method == 'GET':
         lista_cabeceras = Cabecera_Planilla.objects.filter(estado = 1, cod_usuario_id = user).order_by('fecha_clase')

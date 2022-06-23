@@ -13,6 +13,7 @@ urlpatterns = [
     path('cargar_trabajos', views.Trabajos_UtilitizadosCreateAPIView.as_view(), name="cargar_trabajos"),
     path('cargar_metodologia', views.Metodologia_UtilizadaCreateAPIView.as_view(), name="cargar_metodologia"),
     path('borrar_reporte/<int:cabecera>/<str:user>', views.borrarReporte, name="borrar_reporte"),
+    path('listaUnidades_Contenidos/<int:cabecera>', views.listaUnidades_Contenidos, name="listaUnidades_Contenidos"),
 
     #prueba
     path('validarSesion/<int:user>', views.validarSesion, name='validarSesion'),
