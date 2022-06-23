@@ -97,7 +97,6 @@ class Cabecera_PlanillaSerializer2(serializers.ModelSerializer):
     class Meta:
         model = Cabecera_Planilla
         fields = [
-            'cod_cabecera_planilla',
             'cod_tipo_clase',
             'cod_asignatura',
             'cod_usuario',
@@ -107,7 +106,6 @@ class Cabecera_PlanillaSerializer2(serializers.ModelSerializer):
             'fecha_vencimiento',
             'evaluacion',
             'estado',
-            'alta_usuario',
             'modif_usuario'
         ]
 
