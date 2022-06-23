@@ -16,6 +16,7 @@ urlpatterns = [
     path('borrar_reporte/<int:cabecera>/<str:user>', views.borrarReporte, name="borrar_reporte"),
     path('listaUnidades_Contenidos/<int:cabecera>', views.listaUnidades_Contenidos, name="listaUnidades_Contenidos"),
     path('purga/<int:cabecera>', views.purga, name="purga"),
+    path('cambiar_contra/<str:nombre_usuario>', views.UsuarioUpdateAPIView.as_view(), name='cambiar_contra'),
 
     #prueba
     path('validarSesion/<int:user>', views.validarSesion, name='validarSesion'),

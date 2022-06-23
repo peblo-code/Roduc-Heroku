@@ -212,6 +212,7 @@ class Cabecera_Planilla(models.Model):
     hora_salida = models.TimeField(auto_now=False)
     fecha_vencimiento = models.DateField(auto_now=False)
     evaluacion = models.IntegerField()
+    descripcion_adecuacion = models.CharField(max_length=500, blank=True, null=True)
     estado = models.IntegerField()
     alta_usuario = models.CharField(max_length=45)
     alta_fecha = models.DateTimeField(auto_now_add=True)

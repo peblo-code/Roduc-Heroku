@@ -19,6 +19,18 @@ class UsuarioListSerializer(serializers.ModelSerializer):
             'modif_fecha',
         ]
 
+class UsuarioModifySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = [
+            'nombre_usuario',
+            'contraseña',
+            'direccion_email',
+            'estado', 
+            'modif_usuario',
+        ]
+
+
 class UsuarioDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario

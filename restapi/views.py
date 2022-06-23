@@ -48,6 +48,12 @@ class Cabecera_PlanillaUpdateAPIView(generics.UpdateAPIView):
     queryset = Cabecera_Planilla.objects.all()
     serializer_class = Cabecera_PlanillaSerializer2
 
+class UsuarioUpdateAPIView(generics.UpdateAPIView):
+    lookup_field = "nombre_usuario"
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioModifySerializer
+
+
 class EvaluacionesCreateAPIView(generics.CreateAPIView):
     queryset = Evaluaciones.objects.all()
     serializer_class = Evaluaciones_Serializer
