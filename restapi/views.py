@@ -101,12 +101,6 @@ def listaFacultades_Carreras(request, user):
         #LISTA DE TIPOS DE CLASE
         lista_tipo_clase = Tipo_Clase.objects.filter(estado = 1)
         lista_tipo_clase = serializers.serialize('json', lista_tipo_clase)
-        #LISTA DE UNIDADES
-        lista_unidad = Unidad_Aprendizaje.objects.raw('SELECT DISTINCT u.cod_unidad_aprendizaje, u.descripcion FROM "RoducWeb_unidad_aprendizaje" AS u, (SELECT * FROM "RoducWeb_contenido" AS cont WHERE cont.cod_contenido NOT IN (SELECT co.cod_contenido FROM "RoducWeb_contenido" AS co, "RoducWeb_contenidos_dados" AS cd, "RoducWeb_cabecera_planilla" AS c WHERE c.cod_cabecera_planilla = cd.cod_cabecera_planilla_id AND cd.cod_contenido_id = co.cod_contenido AND c.fecha_clase BETWEEN \'' + str(año_actual) + '/01/01\' AND \'' + str(año_actual) + '/12/01\' AND c.estado = 1 AND co.estado = 1 AND cd.estado = 1) AND cont.estado = 1) as con WHERE u.cod_unidad_aprendizaje = con.cod_unidad_aprendizaje_id')
-        lista_unidad = serializers.serialize('json', lista_unidad)
-        #LISTA DE CONTENIDOS
-        lista_contenido = Contenido.objects.raw('(SELECT * FROM "RoducWeb_contenido" AS cont WHERE cont.cod_contenido NOT IN (SELECT co.cod_contenido FROM "RoducWeb_contenido" AS co, "RoducWeb_contenidos_dados" AS cd, "RoducWeb_cabecera_planilla" AS c WHERE c.cod_cabecera_planilla = cd.cod_cabecera_planilla_id AND cd.cod_contenido_id = co.cod_contenido AND c.fecha_clase BETWEEN \'' + str(año_actual) + '/01/01\' AND \'' + str(año_actual) + '/12/01\' AND c.estado = 1 AND co.estado = 1 AND cd.estado = 1) AND cont.estado = 1)')
-        lista_contenido = serializers.serialize('json', lista_contenido)
         #INSTRUMENTO DE EVALUACION
         lista_instrumento_evaluacion = Instrumento_Evaluacion.objects.filter(estado = 1)
         lista_instrumento_evaluacion = serializers.serialize('json', lista_instrumento_evaluacion)
@@ -129,8 +123,6 @@ def listaFacultades_Carreras(request, user):
             "lista_planes": lista_planes,
             "lista_semestre": lista_semestre,
             "lista_tipo_clase": lista_tipo_clase,
-            "lista_unidad": lista_unidad,
-            "lista_contenido": lista_contenido,
             "lista_instrumento_evaluacion": lista_instrumento_evaluacion,
             "lista_recurso": lista_recurso,
             "lista_tipo_evaluacion": lista_tipo_evaluacion,
@@ -163,6 +155,8 @@ def listaUnidades_Contenidos(request, cabecera):
                                                 and co.estado = 1\
                                                 and cd.estado = 1)\
                                             and cont.estado = 1')
+    lista_contenido = serializers.serialize('json', lista_contenido)
+
     lista_unidad = Unidad_Aprendizaje.objects.raw('select\
                                                     distinct u.cod_unidad_aprendizaje,\
                                                     u.descripcion\
@@ -192,6 +186,12 @@ def listaUnidades_Contenidos(request, cabecera):
                                                         and cont.estado = 1) as con\
                                                 where\
                                                     u.cod_unidad_aprendizaje = con.cod_unidad_aprendizaje_id')
+    lista_unidad = serializers.serialize('json', lista_unidad)
+    
+    return JsonResponse({
+        "lista_unidad": lista_unidad,
+        "lista_contenido": lista_contenido,
+    })
     
 
 def historialReportes(request, user):
