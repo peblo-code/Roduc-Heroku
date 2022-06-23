@@ -161,20 +161,20 @@ def listaUnidades_Contenidos(request, cabecera):
                                                     distinct u.cod_unidad_aprendizaje,\
                                                     u.descripcion\
                                                 from\
-                                                    RoducWeb_unidad_aprendizaje as u,\
+                                                    "RoducWeb_unidad_aprendizaje" as u,\
                                                     (\
                                                     select\
                                                         *\
                                                     from\
-                                                        RoducWeb_contenido as cont\
+                                                        "RoducWeb_contenido" as cont\
                                                     where\
                                                         cont.cod_contenido not in (\
                                                         select\
                                                             co.cod_contenido\
                                                         from\
-                                                            RoducWeb_contenido as co,\
-                                                            RoducWeb_contenidos_dados as cd,\
-                                                            RoducWeb_cabecera_planilla as c\
+                                                            "RoducWeb_contenido" as co,\
+                                                            "RoducWeb_contenidos_dados" as cd,\
+                                                            "RoducWeb_cabecera_planilla" as c\
                                                         where\
                                                             c.cod_cabecera_planilla = cd.cod_cabecera_planilla_id\
                                                             and cd.cod_cabecera_planilla_id <> ' + str(cabecera) + '\
