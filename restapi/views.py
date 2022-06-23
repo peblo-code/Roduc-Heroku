@@ -143,3 +143,11 @@ def historialReportes(request, user):
         lista_cabeceras = Cabecera_Planilla.objects.filter(estado = 1, cod_usuario_id = user).order_by('fecha_clase')
         lista_cabeceras = serializers.serialize('json', lista_cabeceras)
         return JsonResponse({"lista_cabeceras": lista_cabeceras})
+
+def borrarReporte(request, cabecera, user):
+    if request.method == 'GET':
+        datos_cabecera = Cabecera_Planilla.objects.get(cod_cabecera_planilla = cabecera)
+        datos_cabecera.estado = 0
+        datos_cabecera.modif_usuario = user
+        datos_cabecera.save()
+        return JsonResponse({"bandera": 1})
