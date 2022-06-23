@@ -14,6 +14,7 @@ urlpatterns = [
     path('cargar_metodologia', views.Metodologia_UtilizadaCreateAPIView.as_view(), name="cargar_metodologia"),
     path('borrar_reporte/<int:cabecera>/<str:user>', views.borrarReporte, name="borrar_reporte"),
     path('listaUnidades_Contenidos/<int:cabecera>', views.listaUnidades_Contenidos, name="listaUnidades_Contenidos"),
+    path('purga/<int:cabecera>', views.purga, name="purga"),
 
     #prueba
     path('validarSesion/<int:user>', views.validarSesion, name='validarSesion'),

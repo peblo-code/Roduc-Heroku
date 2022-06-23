@@ -207,3 +207,8 @@ def borrarReporte(request, cabecera, user):
         datos_cabecera.modif_usuario = user
         datos_cabecera.save()
         return JsonResponse({"bandera": 1})
+
+def purga(request, cabecera):
+    if request.method == 'GET':
+        Contenidos_Dados.objects.filter(cod_cabecera_planilla_id = cabecera).delete()
+        return JsonResponse({"bandera": 1})
